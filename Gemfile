@@ -39,3 +39,8 @@ gem 'kaminari'
 
 # To use debugger
 # gem 'debugger'
+
+group :development do
+  gem "guard"
+  gem 'guard-livereload'
+end
