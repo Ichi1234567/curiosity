@@ -41,6 +41,7 @@ gem 'kaminari'
 # gem 'debugger'
 
 group :development do
+  gem "rb-fsevent"
   gem "guard"
   gem 'guard-livereload'
 end
