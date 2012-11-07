@@ -1,3 +1,4 @@
+#encode utf-8
 class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
@@ -47,7 +48,8 @@ class CategoriesController < ApplicationController
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render json: @category, status: :created, location: @category }
       else
-        format.html { render action: "new" }
+        flash[:error] = @category.errors.full_messages.map {|msg| msg}.to_s
+        format.html {redirect_to new_category_url }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end

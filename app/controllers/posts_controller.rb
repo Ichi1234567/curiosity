@@ -2,11 +2,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    #@posts = Post.all
+    @posts = Post.page(params[:page]).per(5)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
+      format.js
     end
   end
 
@@ -47,7 +49,9 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new" }
+        flash[:error] = @category.errors.full_messages.map {|msg| msg}.to_s
+        #format.html { render action: "new" }
+        format.html { redirect_to new_post_url }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -63,6 +67,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
+        flash[:error] = @category.errors.full_messages.map {|msg| msg}.to_s
         format.html { render action: "edit" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -75,9 +80,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-    end
+    #respond_to do |format|
+    #  format.html { redirect_to posts_url }
+    #  format.json { render json: {status: "success", data: @post} }
+    #end
+    render json: {status: "success", data: @post}
+
   end
 end
+  

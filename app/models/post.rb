@@ -1,3 +1,4 @@
+#encode utf-8
 class Post < ActiveRecord::Base
   attr_accessible :content, :title, :category_id
   belongs_to :category
@@ -5,7 +6,9 @@ class Post < ActiveRecord::Base
   delegate :name, :to => :category, :prefix => true, :allow_nil => true
 
   validates_presence_of :title, :content
+  #validates :title,  :presence => true
+  #validates :content, :presence => { :message => "不能空白" }
 
-  default_scope order("id DESC")
+  default_scope order("created_at DESC")
 
 end
