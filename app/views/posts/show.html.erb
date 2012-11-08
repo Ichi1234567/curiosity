@@ -8,9 +8,15 @@
 
 <p>
   <b>Category:</b>
-  <%= find_category(@post.category_id) %>
+  <% if @post.category_id %>
+    <%= find_category(@post.category_id) %>
+  <% end %>
 </p>
-
+<% if @post.avatar_url %>
+  <p>
+    <%= image_tag @post.avatar.to_s %>
+  </p>
+<% end %>
 <p>
   <b>Content:</b>
   <%= @post.content %>
