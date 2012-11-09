@@ -1,27 +1,29 @@
 <div class="container">
-  <h1>Listing posts</h1>
-  
-  <table class="table table-striped table-hover">
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  
-    <tbody id="post_list">
-      <%= render :partial => "postList", :locals => {:list => @posts} %>
-    </tbody>
-  </table>
-  
-  <div>
-    <h3>PREVIEW</h3>
-    <div id="preview"></div>
+  <div class="span8">
+    <h1>Listing posts</h1>
+    
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    
+      <tbody id="post_list">
+        <%= render :partial => "postList", :locals => {:list => @posts} %>
+      </tbody>
+    </table>
+    
+    <div>
+      <h3>PREVIEW</h3>
+      <div id="preview"></div>
+    </div>
+    
+    <br />
+    <div id = "paginator"><%= paginate @posts, :remote => true %></div>
+    <%= link_to 'New Post', new_post_path %>
   </div>
-
-  <br />
-  <div id = "paginator"><%= paginate @posts, :remote => true %></div>
-  <%= link_to 'New Post', new_post_path %>
 </div>

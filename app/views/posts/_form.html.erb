@@ -16,16 +16,20 @@
     <div><%= flash[:error] %></div>
   <% end %>
 
-  <%= f.input :title, :label => "Title"%>
-  <%= f.input :category_id, :collection => category_options %>
+  <%= f.input :title,
+              :label => "Title:"%>
+  <%= f.input :category_id,
+              :label => "Category:",
+              :collection => category_options %>
+  <%= f.input :avatar,
+              :label => "Image:",
+              :as => :file %>
   <% if @post.avatar_url %>
-    <%= image_tag @post.avatar_url(:thumb).to_s %>
+    <div class="controls">
+      <%= image_tag @post.avatar_url(:thumb).to_s %>
+    </div>
   <% end %>
-  <%= f.input :avatar, :label => "image", :as => :file %>
-  <div class="field">
-    <%= f.input :content, :label => "Content" %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :content, 
+              :label => "Content:" %>
+  <%= f.submit :class =>"controls btn" %>
 <% end %>

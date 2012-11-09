@@ -49,9 +49,8 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        flash[:error] = @category.errors.full_messages.map {|msg| msg}.to_s
-        #format.html { render action: "new" }
-        format.html { redirect_to new_post_url }
+        #flash[:error] = @category.errors.full_messages.map {|msg| msg}.to_s
+        format.html { render action: "new" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

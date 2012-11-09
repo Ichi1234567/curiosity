@@ -1,6 +1,6 @@
 <%= content_tag_for :tr, list do |post| %>
-      <td><%= post.title %></td>
-      <td><%= post.content %></td>
+      <td class="span2"><%= post.title %></td>
+      <td class="span10"><%= post.content %></td>
       <td><%= link_to "Preview", post, "remote" => true,
                                        "class" => "preview",
                                        "data-type" => :json %></td>
