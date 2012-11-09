@@ -1,4 +1,9 @@
-<%= simple_form_for(@category) do |f| %>
+<%= simple_form_for(@category, :html => {
+  :multipart => true, :class => "form-horizontal" },
+  :defaults => {
+    :wrapper_html => { :class => "control-group" },
+    :label_html => { :class => "control-label" }
+}) do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -12,19 +17,15 @@
   <% end %>
   <div><%= flash[:error] %></div>
 
-  <div class="field">
-    <%= f.input :name, :label => "Name" %>
-  </div>
-  <div id="uploader"></div>
+    <%= f.input :name, 
+                :label => "Name:" %>
+  <!-- <div id="uploader"></div>
   <div id="container">
     <div id="file_list">No runtime found.</div>
     <a id="pick_file" href="#">select files</a>
     <a id="upload_file" href="#">upload files </a>
-  </div>
-  <div class="field">
-    <%= f.input :description, :label => "Description" %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </div> -->
+    <%= f.input :description, 
+                :label => "Description:" %>
+    <%= f.submit :class => "controls btn" %>
 <% end %>

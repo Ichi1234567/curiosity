@@ -1,33 +1,33 @@
-<h1>Listing categories</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Avatar</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.name %></td>
-    <td>
-      <% if category.avatar %>
-        <%= img_tag category.avatar.to_s %>
-      <% end %>
-    </td>
-    <td><%= category.description %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, "method" => :delete,
-                                         "data" => { confirm: 'Are you sure?' },
-                                         "class" => "delete" %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Category', new_category_path %>
+<div class="container">
+  <div class="span8">
+    <h1>Listing categories</h1>
+    
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Avatar</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    
+    <%= content_tag_for :tr, @categories do |category| %>
+      <td class="span2"><%= category.name %></td>
+      <td class="span5">
+        <% if category.avatar %>
+          <%= img_tag category.avatar.to_s %>
+        <% end %>
+      </td>
+      <td class="span5"><%= category.description %></td>
+      <td><%= link_to 'Show', category %></td>
+      <td><%= link_to 'Edit', edit_category_path(category) %></td>
+      <td><%= link_to 'Destroy', category, "method" => :delete,
+                                           "data" => { confirm: 'Are you sure?' },
+                                           "class" => "delete" %></td>
+    <% end %>
+    </table>
+    <br />
+    <%= link_to 'New Category', new_category_path %>
+  </div>
+</div>

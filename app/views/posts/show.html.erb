@@ -16,7 +16,7 @@
   </p>
   <% if @post.avatar_url %>
     <p>
-      <%= image_tag @post.avatar.to_s %>
+      <%= image_tag @post.avatar.to_s, :class => "img-polaroid" %>
     </p>
   <% end %>
   <p>
