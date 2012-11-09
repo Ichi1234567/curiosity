@@ -16,3 +16,6 @@
 
 //= require_tree .
 
+//= require handlebars.runtime
+//= require handlebars
+//= require_tree ../templates

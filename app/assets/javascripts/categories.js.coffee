@@ -4,11 +4,6 @@
 
 
 $(($) ->
-  console.log $(".delete").length
-  $(".delete").on({
-    "ajax:success": () ->
-      console.log "ajax callback"
-  })
   if typeof plupload isnt "undefined"
     uploader = new plupload.Uploader({
       runtimes : 'gears,html5,flash,silverlight,browserplus',

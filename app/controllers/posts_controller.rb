@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @post }
+      format.json# { render json: @post }
     end
   end
 
@@ -82,7 +82,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
      format.html { redirect_to posts_url }
-     format.json { render json: {status: "success", data: @post}, content_type => "text/json" }
+     format.json { render json: {status: "success", data: @post} }
      # format.js 
     end
     #render json: {status: "success", data: @post}

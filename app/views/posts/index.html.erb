@@ -8,6 +8,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   
     <tbody id="post_list">
@@ -15,6 +16,11 @@
     </tbody>
   </table>
   
+  <div>
+    <h3>PREVIEW</h3>
+    <div id="preview"></div>
+  </div>
+
   <br />
   <div id = "paginator"><%= paginate @posts, :remote => true %></div>
   <%= link_to 'New Post', new_post_path %>
