@@ -1,4 +1,8 @@
-<%= simple_form_for(@post, :html => {:multipart => true}) do |f| %>
+<%= simple_form_for(@post, :html => {:multipart => true, :class => "form-horizontal"},
+                           :defaults => {
+                              :wrapper_html => {:class => "control-group"},
+                              :label_html => {:class => "control-lable"}
+                           }) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -12,12 +16,8 @@
     <div><%= flash[:error] %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.input :title, :label => "Title"%>
-  </div>
-  <div class="field">
-    <%= f.input :category_id, :collection => category_options %>
-  </div>
+  <%= f.input :title, :label => "Title"%>
+  <%= f.input :category_id, :collection => category_options %>
   <% if @post.avatar_url %>
     <%= image_tag @post.avatar_url(:thumb).to_s %>
   <% end %>

@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.json# { render json: @posts }
       format.js
     end
   end
@@ -80,11 +80,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
 
-    #respond_to do |format|
-    #  format.html { redirect_to posts_url }
-    #  format.json { render json: {status: "success", data: @post} }
-    #end
-    render json: {status: "success", data: @post}
+    respond_to do |format|
+     format.html { redirect_to posts_url }
+     format.json { render json: {status: "success", data: @post}, content_type => "text/json" }
+     # format.js 
+    end
+    #render json: {status: "success", data: @post}
 
   end
 end

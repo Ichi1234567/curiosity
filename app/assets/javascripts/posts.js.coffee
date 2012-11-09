@@ -2,9 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(($) ->
+  # console.log($(".del_post").length)
   $(".del_post").on(
+    "click": () ->
+      console.log "click"
     "ajax:success": (e, data) ->
-      #console.log(arguments)
+      console.log(arguments)
       $("#post_" + data.data.id).fadeOut("slow")
   )
 )
