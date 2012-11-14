@@ -62,4 +62,5 @@ group :development do
   gem "rb-fsevent"
   gem "guard"
   gem 'guard-livereload'
+  gem 'quiet_assets'
 end

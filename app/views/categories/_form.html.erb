@@ -20,33 +20,40 @@
   <%= f.input :name, 
               :label => "Name:" %>
 
-  <%= f.simple_fields_for :img, :html => {
-    :multipart =>true,
-    :defaults => {
-      :wrapper_html => { :class => "control-group"},
-      :label_html => {:class => "control-label"}
-    }
-  } do |img_form| %>
-    <label class="file control-label" for="category_imgs">照片</label>
-    <div id="container" class="controls ">
-      <div id="filelist">No runtime found.</div>
-      <br />
-      <a id="img" href="#">[Select files]</a>
-      <a id="uploadfiles" href="#">[Upload files]</a>
-    </div>
+  <label class="file control-label" for="category_imgs">照片</label>
+  <div id="container" class="controls ">
+    <div id="filelist"></div>
+    <br />
+    <a id="select_file" href="#">[Select file]</a>
+  </div>
        
-  <% end %>
 
     <%= f.input :description, 
                 :label => "Description:" %>
-    <%= f.submit :class => "controls btn", :id => "submit" %>
+    <%#= f.submit :class => "controls btn" %>
+    <a id="submit" href="#" class="btn btn-primary controls">確認送出</a>
 <% end %>
 
 <script>
+  require.config({
+    shim: {
+      "plupload": {
+        "exports": "plupload"
+      },
+      "plupload.html5": ["plupload"],
+      "plupload.browserplus": ["plupload"]
+    }
+  });
+  require(["require", "jquery", "plupload.html5", "plupload.browserplus"], function(require, $) {
+    var _path = window.location.pathname.split("/"),
+        _status = _path.pop();
+    // console.log(_path.pop());
+    var _url = (_status == "new") ? ("/categories") : ("ajax_update");
     var uploader = new plupload.Uploader({
-      runtimes: 'flash,html4',
-      browse_button: 'img',
-      url: '<%=  %>',
+      runtimes: 'flash,html5',
+      browse_button: 'select_file',
+      // url: '<%= categories_path(:format => :json) %>',
+      url: _url,
       flash_swf_url: '/assets/plupload.flash.swf',  
       silverlight_xap_url: '/assets/plupload.silverlight.xap',
       max_file_size: '5mb',
@@ -57,16 +64,21 @@
 
       init: {
         FileUploaded: function(up, file, info) {
-          eval(info["response"]);
+          //eval(info["response"]);
+          // console.log(arguments);
+          var response = JSON.parse(info.response);
+          console.log(response);
+          // window.location = "/categories/" + response.category.id
         }
       }
     });
 
     uploader.bind('BeforeUpload', function (up, file) {
       up.settings.multipart_params = {
-      '_http_accept': 'application/javascript',
+        '_http_accept': 'application/javascript',
         'authenticity_token' : '<%= form_authenticity_token %>',
-        "category_id": "<%= @category.id %>"
+        'category[name]': $("#category_name").val(),
+        "category[description]": $("#category_description").val()
       }
     });
 
@@ -77,14 +89,47 @@
 
     uploader.init();
 
-  uploader.bind('FilesAdded', function(up, files) {
-      $.each(files, function(i, file) {
-          $('#filelist').html(file.name + ' (' + plupload.formatSize(file.size) + ')');
-      });
-      up.refresh(); // Reposition Flash/Silverlight
-  });        
+    uploader.bind('FilesAdded', function(up, files) {
+        $.each(files, function(i, file) {
+            $('#filelist').html(file.name + ' (' + plupload.formatSize(file.size) + ')');
+        });
+        $("#select_file").hide();
+        up.refresh(); // Reposition Flash/Silverlight
+    });
 
-  uploader.bind('UploadProgress', function(up, file) {
-    $('#uploadfiles').text("照片上傳中..." + up.total.percent + "%");
+    uploader.bind('UploadProgress', function(up, file) {
+      $('#uploadfiles').text("照片上傳中..." + up.total.percent + "%");
+      $
+      $('#submit').text("照片上傳中..." + up.total.percent + "%");
+    });
+
+
+    $("#submit").on("click", function(e) {
+      // console.log(uploader);
+      (uploader.files.length) ? (uploader.start()) : ((function() {
+        var ajax_settings = {
+          url: "/categories",
+          data: {},
+          dataType: "json"
+        };
+        (_status == "new") ? (
+          ajax_settings.type = "POST"
+        ) : (
+          ajax_settings.url = "/categories/" + _path[2],
+          ajax_settings.type = "PUT",
+          ajax_settings.data.id = _path[2]
+        );
+        ajax_settings.data.category = {
+          "name": $("#category_name").val(),
+          "description": $("#category_description").val()
+        }
+        $.ajax(ajax_settings).done(function(response) {
+          // console.log(arguments);
+          var categoryInfo = response.category;
+          window.location = "/categories/" + categoryInfo.id;
+        })
+      })());
+      e.preventDefault();
+    })
   });
 </script>

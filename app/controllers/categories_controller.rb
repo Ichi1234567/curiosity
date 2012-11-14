@@ -42,11 +42,16 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(params[:category])
-
+    if params[:file]
+      @category.image = params[:file]
+    end
+      
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
-        format.json { render json: @category, status: :created, location: @category }
+        # format.json { render json: @category, status: :created, location: @category }
+        format.json 
+        # format.js { render :text => "window.location = '#{category_path(@category)}'"}
       else
         flash[:error] = @category.errors.full_messages.map {|msg| msg}.to_s
         format.html {redirect_to new_category_url }
@@ -60,10 +65,11 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
 
+
     respond_to do |format|
       if @category.update_attributes(params[:category])
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-        format.json { head :no_content }
+        format.json
       else
         format.html { render action: "edit" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -82,4 +88,10 @@ class CategoriesController < ApplicationController
       format.json { render json: @category }
     end
   end
+
+
+  # POST /categories/:category_id/picutre
+  # def picture
+    
+  # end
 end
