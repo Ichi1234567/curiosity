@@ -1,7 +1,7 @@
 Curiosity::Application.routes.draw do
   resources :categories do
     member do 
-      post 'picture'#, to: "categories#picture_upload"
+      post 'upload_picture'#, to: "categories#upload_picture"
     end
   end
 

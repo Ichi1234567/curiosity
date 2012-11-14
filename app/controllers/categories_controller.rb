@@ -77,6 +77,21 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def upload_picture
+    @category = Category.find(params[:id])
+    @category.image = params[:file] if params[:file]
+
+    respond_to { |format|
+      if @category.update_attributes(params[:category])
+        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.json
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
+    }
+  end
+
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
