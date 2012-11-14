@@ -6,6 +6,12 @@
     <h4>Name:</h4>
     <%= @category.name %>
   </p>
+
+  <p>
+    <% if @category.image_url %>
+      <%= image_tag @category.image.to_s %>
+    <% end %>
+  </p>
   
   <p>
     <h4>Description:</h4>

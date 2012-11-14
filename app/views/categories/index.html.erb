@@ -5,7 +5,7 @@
     <table class="table table-striped">
       <tr>
         <th>Name</th>
-        <th>Avatar</th>
+        <th>Image</th>
         <th>Description</th>
         <th></th>
         <th></th>
@@ -15,8 +15,8 @@
     <%= content_tag_for :tr, @categories do |category| %>
       <td class="span2"><%= category.name %></td>
       <td class="span5">
-        <% if category.avatar %>
-          <%= img_tag category.avatar.to_s %>
+        <% if category.image_url %>
+          <%= image_tag category.image.to_s %>
         <% end %>
       </td>
       <td class="span5"><%= category.description %></td>
