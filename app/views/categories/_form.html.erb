@@ -5,7 +5,7 @@
     :label_html => { :class => "control-label" }
 }) do |f| %>
   <% if @category.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="error">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
       <ul>
@@ -14,18 +14,77 @@
       <% end %>
       </ul>
     </div>
+    <div><%= flash[:error] %></div>
   <% end %>
-  <div><%= flash[:error] %></div>
 
-    <%= f.input :name, 
-                :label => "Name:" %>
-  <!-- <div id="uploader"></div>
-  <div id="container">
-    <div id="file_list">No runtime found.</div>
-    <a id="pick_file" href="#">select files</a>
-    <a id="upload_file" href="#">upload files </a>
-  </div> -->
+  <%= f.input :name, 
+              :label => "Name:" %>
+
+  <%= f.simple_fields_for :img, :html => {
+    :multipart =>true,
+    :defaults => {
+      :wrapper_html => { :class => "control-group"},
+      :label_html => {:class => "control-label"}
+    }
+  } do |img_form| %>
+    <label class="file control-label" for="category_imgs">照片</label>
+    <div id="container" class="controls ">
+      <div id="filelist">No runtime found.</div>
+      <br />
+      <a id="img" href="#">[Select files]</a>
+      <a id="uploadfiles" href="#">[Upload files]</a>
+    </div>
+       
+  <% end %>
+
     <%= f.input :description, 
                 :label => "Description:" %>
-    <%= f.submit :class => "controls btn" %>
+    <%= f.submit :class => "controls btn", :id => "submit" %>
 <% end %>
+
+<script>
+    var uploader = new plupload.Uploader({
+      runtimes: 'flash,html4',
+      browse_button: 'img',
+      url: '<%=  %>',
+      flash_swf_url: '/assets/plupload.flash.swf',  
+      silverlight_xap_url: '/assets/plupload.silverlight.xap',
+      max_file_size: '5mb',
+      filters: [{title: "Images", extensions: "jpg,jpeg,png"}],
+      resize : { width : 1024, height : 768, quality : 95 },
+      multiple_queues: false,
+      multipart: true,
+
+      init: {
+        FileUploaded: function(up, file, info) {
+          eval(info["response"]);
+        }
+      }
+    });
+
+    uploader.bind('BeforeUpload', function (up, file) {
+      up.settings.multipart_params = {
+      '_http_accept': 'application/javascript',
+        'authenticity_token' : '<%= form_authenticity_token %>',
+        "category_id": "<%= @category.id %>"
+      }
+    });
+
+    $('#uploadfiles').click(function(e) {
+      uploader.start();
+      e.preventDefault();
+    });
+
+    uploader.init();
+
+  uploader.bind('FilesAdded', function(up, files) {
+      $.each(files, function(i, file) {
+          $('#filelist').html(file.name + ' (' + plupload.formatSize(file.size) + ')');
+      });
+      up.refresh(); // Reposition Flash/Silverlight
+  });        
+
+  uploader.bind('UploadProgress', function(up, file) {
+    $('#uploadfiles').text("照片上傳中..." + up.total.percent + "%");
+  });
+</script>

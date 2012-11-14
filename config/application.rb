@@ -61,5 +61,6 @@ module Curiosity
 
     # disable the precompile for handlebars    
     config.assets.initialize_on_precompile = false
+    config.assets.paths << "#{Rails.root}/app/assets/templates"
   end
 end

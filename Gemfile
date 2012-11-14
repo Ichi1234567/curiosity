@@ -36,6 +36,10 @@ gem 'plupload-rails'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'twitter-bootstrap-rails'
+gem 'requirejs-rails'
+gem "rails-backbone"
+gem "plupload-rails"
+gem 'mysql2'
 
 
 # To use ActiveModel has_secure_password
@@ -43,6 +47,7 @@ gem 'twitter-bootstrap-rails'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
+gem 'mysql2'
 
 # Use unicorn as the app server
 # gem 'unicorn'

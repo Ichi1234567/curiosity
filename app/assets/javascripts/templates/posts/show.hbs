@@ -1,0 +1,22 @@
+<div class="container">
+  <p>
+    <b>Title:</b>
+    {{title}}
+  </p>
+  {{#if category}}
+    <p>
+      <b>Category:</b>
+      {{category}}
+    </p>
+  {{/if}}
+
+  {{#if avatar.thumb_url}}
+    <p>
+      <img src="{{avatar.thumb_url}}" class="img-polaroid" >
+    </p>
+  {{/if}}
+  <p>
+    <b>Content:</b>
+    {{content}}
+  </p>
+</div>
