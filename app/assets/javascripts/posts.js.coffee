@@ -28,6 +28,16 @@ require({
       )
       e.preventDefault()
     delete_click: (e) ->
+      _$target = $(e.target)
+      _id= _$target.parent().parent().attr("id").split("_")[1]
+      $.ajax({
+        url: "/posts/" + _id
+        dataType: "json"
+        type: "DELETE"
+      }).done((data) ->
+        console.log data
+        $("#post_" + data.data.id).fadeOut("slow")
+      )
   )
   new ViewIndex({
     el: "body"
