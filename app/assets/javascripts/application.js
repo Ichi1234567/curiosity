@@ -11,38 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-require.config({
-    hbs : {
-        templateExtension : 'hbs',
-        // if disableI18n is `true` it won't load locales and the i18n helper
-        // won't work as well.
-        disableI18n : true
-    },
-    "paths": {
-    },
-    "shim": {
-        jquery_ujs: ["jquery"],
-        underscore: {
-            exports: "_"
-        },
-        backbone: {
-            deps: ["underscore"],
-            exports: "Backbone"
-        },
-        backbone_rails_sync: ["backbone"],
-        backbone_datalink: ["backbone_datalink"],
-        "handlebars": {
-            exports: "Handlebars"
-        },
-        "handlebars.runtime": ["handlebars"],
-        "plupload": {
-            "exports": "plupload"
-        },
-        "jquery.plupload.queue": ["jquery", "plupload"],
-        "plupload.html5": ["plupload"]
-    }
-});
 
-define(["jquery_ujs", "backbone", "hbs", "handlebars", "twitter/bootstrap"], function() {
+define(["jquery_ujs", "twitter/bootstrap"], function() {
     console.log("application");
 });
