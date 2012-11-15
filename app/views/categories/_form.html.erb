@@ -48,12 +48,11 @@
     var _path = window.location.pathname.split("/"),
         _status = _path.pop();
     // console.log(_path.pop());
-    var _url = (_status == "new") ? ("/categories") : ("ajax_update");
+    var _url = (_status == "new") ? ("/categories.json") : ("/categories/"+_path[2]+"/upload_picture.json");
     var uploader = new plupload.Uploader({
       runtimes: 'flash,html5',
       browse_button: 'select_file',
-      url: '<%= categories_path(:format => :json) %>',
-      // url: _url,
+      url: _url,
       flash_swf_url: '/assets/plupload.flash.swf',  
       silverlight_xap_url: '/assets/plupload.silverlight.xap',
       max_file_size: '5mb',
@@ -67,8 +66,8 @@
           //eval(info["response"]);
           // console.log(arguments);
           var response = JSON.parse(info.response);
-          console.log(response);
-          // window.location = "/categories/" + response.category.id
+          // console.log(response);
+          window.location = "/categories/" + response.category.id
         }
       }
     });

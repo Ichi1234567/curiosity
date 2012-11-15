@@ -30,7 +30,7 @@ gem 'kaminari'
 gem 'rmagick'
 gem 'carrierwave'
 
-gem 'plupload-rails'
+
 
 
 gem "therubyracer"

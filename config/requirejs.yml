@@ -1,0 +1,24 @@
+shim:
+  jquery_ujs: ["jquery"]
+  underscore:
+    exports: "_"
+  backbone:
+    deps: ["underscore"]
+    exports: "Backbone"
+  backbone_rails_sync: ["backbone"]
+  backbone_datalink: ["backbone_datalink"]
+  handlebars:
+    exports: "Handlebars"
+  handlebars.runtime: ["handlebars"]
+  plupload: 
+    exports: "plupload"
+  jquery.plupload.queue: ["jquery", "plupload"]
+  plupload.html5: ["plupload"]
+
+
+#自定義的config，如果要使用，需要加在當前環境
+#hbs :
+#  templateExtension: "hbs"
+#  # if disableI18n is `true` it won't load locales and the i18n helper
+#  # won't work as well.
+#  disableI18n: true
