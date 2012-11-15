@@ -1,5 +1,9 @@
+modules:
+  - name: "application"
+
 shim:
   jquery_ujs: ["jquery"]
+  twitter/bootstrap: ["jquery"]
   underscore:
     exports: "_"
   backbone:
@@ -14,6 +18,9 @@ shim:
     exports: "plupload"
   jquery.plupload.queue: ["jquery", "plupload"]
   plupload.html5: ["plupload"]
+
+  posts: ["application", "backbone"]
+  categories: ["application"]
 
 
 #自定義的config，如果要使用，需要加在當前環境

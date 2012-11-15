@@ -13,15 +13,8 @@
 
 
 <script>
-  require.config({
-    shim: {
-      "<%= params[:controller] %>": {
-        deps: ["application"]
-      }
-    }
-  });
-  require(["<%= params[:controller] %>"], function(m) {
-    console.log(arguments);
+  require(["<%= params[:controller] %>"], function() {
+    console.log("in " + "<%= params[:controller] %>");
   });
 </script>
 
