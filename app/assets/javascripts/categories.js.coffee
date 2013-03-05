@@ -54,6 +54,7 @@
 
 
 define(["require", "backbone", "jquery", "bootstrap", "jquery.maxlength", "uploader"], (require) ->
+  console.log 777
   console.log("categories index")
   #$ = ( require "jquery" ).noConflict(true)
   Backbone = require "backbone"
