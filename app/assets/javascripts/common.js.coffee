@@ -1,4 +1,4 @@
-define(["jquery", "bootstrap", "backbone"], ($) ->
+define(["bootstrap", "backbone"], () ->
   console.log "common"
-  $.noConflict(true)
+  #$.noConflict(true)
 )

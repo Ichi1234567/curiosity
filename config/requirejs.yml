@@ -13,10 +13,15 @@ shim:
     exports: "jQuery"
   jquery_ujs: ["jquery"]
   #twitter/bootstrap: ["jquery"]
+  common:
+    deps: ["jquery"]
   bootstrap:
     deps: ["jquery"]
+  jquery.fileupload-fp:
+    exports: "jQuery"
   jquery.maxlength:
     deps: ["jquery"]
+    exports: "jQuery.fn.maxlength"
   underscore:
     exports: "_"
   backbone:

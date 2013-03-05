@@ -53,15 +53,26 @@
 #)
 
 
-define((require) ->
+define(["require", "backbone", "jquery", "bootstrap", "jquery.maxlength", "uploader"], (require) ->
   console.log("categories index")
-  require "common"
+  #$ = ( require "jquery" ).noConflict(true)
+  Backbone = require "backbone"
   $ = require "jquery"
-
-  require "uploader"
-  #require "bootstrap"
-  #require "jquery.fileupload-fp"
+  require "bootstrap"
+  $.test = 123
   require "jquery.maxlength"
+  #require "bootstrap-modal"
+  require "uploader"
+  if typeof jQuery is "function"
+    jQuery(($) ->
+      console.log "ready"
+      console.log("$.fn.modal is " +  typeof $.fn.modal)
+      console.log("$.fn.fileupload is " +  typeof $.fn.fileupload)
+      console.log("$.fn.maxlength is " +  typeof $.fn.maxlength)
+    )
+  else
+    console.log jQuery
+  console.log("not ready")
   console.log("$.fn.modal is " +  typeof $.fn.modal)
   console.log("$.fn.fileupload is " +  typeof $.fn.fileupload)
   console.log("$.fn.maxlength is " +  typeof $.fn.maxlength)

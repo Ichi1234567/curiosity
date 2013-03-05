@@ -16,14 +16,18 @@
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
+        console.log("amd maxlength");
         define([
             'jquery',
         ], factory);
     } else {
         // Browser globals:
+        console.log("non-amd maxlength");
         factory(window.jQuery);
     }
 }(function ($) {
+    console.log("maxlength");
+    $.test = 456;
 $.fn.maxlength = function (settings) {
 
     if (typeof settings == 'string') {

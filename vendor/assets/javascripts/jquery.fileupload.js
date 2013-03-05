@@ -16,12 +16,14 @@
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
+        console.log("amd uploader");
         define([
             'jquery',
             'jquery.ui.widget'
         ], factory);
     } else {
         // Browser globals:
+        console.log("non-amd uploader");
         factory(window.jQuery);
     }
 }(function ($) {
