@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+  def test
+    respond_to do |format|
+      format.html
+    end
+  end
   # GET /posts
   # GET /posts.json
   def index

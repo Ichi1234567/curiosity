@@ -11,6 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-define(["jquery_ujs", "twitter/bootstrap"], function() {
-    console.log("application");
-});
+//= require jquery
+//= require jquery_ujs

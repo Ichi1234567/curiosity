@@ -3,8 +3,7 @@
 <head>
   <title>Curiosity</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%# javascript_include_tag "application" %>
-  <%= requirejs_include_tag "application" %>
+  <%= requirejs_include_tag "categories" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,11 +11,6 @@
 <%= yield %>
 
 
-<script>
-  require(["<%= params[:controller] %>"], function() {
-    console.log("in " + "<%= params[:controller] %>");
-  });
-</script>
 
 </body>
 </html>

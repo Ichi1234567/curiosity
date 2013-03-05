@@ -1,5 +1,10 @@
 #encode utf-8
 class CategoriesController < ApplicationController
+  def test
+    respond_to do |format|
+      format.html
+    end
+  end
   # GET /categories
   # GET /categories.json
   def index

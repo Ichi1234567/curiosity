@@ -30,6 +30,8 @@ gem 'kaminari'
 gem 'rmagick'
 gem 'carrierwave'
 
+gem 'requirejs-rails'
+gem 'bootstrap-sass', '~> 2.3.0.1'
 
 
 
@@ -38,7 +40,7 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem 'twitter-bootstrap-rails'
 gem 'requirejs-rails'
 gem "rails-backbone"
-gem "plupload-rails"
+#gem "plupload-rails"
 gem 'mysql2'
 
 

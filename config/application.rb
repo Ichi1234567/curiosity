@@ -62,5 +62,6 @@ module Curiosity
     # disable the precompile for handlebars    
     config.assets.initialize_on_precompile = false
     config.assets.paths << "#{Rails.root}/app/assets/templates"
+    config.assets.paths << Rails.root.join("app", "assets", "flash")
   end
 end

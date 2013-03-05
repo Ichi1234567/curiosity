@@ -1,9 +1,22 @@
+enforceDefine: true
 modules:
-  - name: "application"
+  - name: "common"
+  - name: "categories"
+    exclude: [ "common" ]
+
+paths:
+  jquery: "jquery"
+  bootstrap: "bootstrap"
 
 shim:
+  jquery:
+    exports: "jQuery"
   jquery_ujs: ["jquery"]
-  twitter/bootstrap: ["jquery"]
+  #twitter/bootstrap: ["jquery"]
+  bootstrap:
+    deps: ["jquery"]
+  jquery.maxlength:
+    deps: ["jquery"]
   underscore:
     exports: "_"
   backbone:
@@ -14,13 +27,13 @@ shim:
   handlebars:
     exports: "Handlebars"
   handlebars.runtime: ["handlebars"]
-  plupload: 
-    exports: "plupload"
-  jquery.plupload.queue: ["jquery", "plupload"]
-  plupload.html5: ["plupload"]
+  #plupload: 
+    #exports: "plupload"
+  #jquery.plupload.queue: ["jquery", "plupload"]
+  #plupload.html5: ["plupload"]
 
-  posts: ["application", "backbone"]
-  categories: ["application"]
+  #posts: ["application", "backbone"]
+  #categories: ["application"]
 
 
 #自定義的config，如果要使用，需要加在當前環境
